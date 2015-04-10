@@ -935,6 +935,7 @@ idendro<-structure(function# Interactive Dendrogram
         ## setup plot
         ##
         xlab<-paste('height',ifelse(!is.na(clusterCuttingHeight),paste(' (cutting at ',format(clusterCuttingHeight),')',sep=''),''),sep='')
+        opar<-par(ask=FALSE)
         plot(c(max(h$height),-max(h$height)*heatmapRelSizeRelToDendro),c(0,n*1),type='n',
             frame.plot=T,fg='gray',ylab='',xlim=xlimIncludingMaps,xlab=xlab,ylim=ylim,yaxt="n",xaxs='i',yaxs='i')#,xaxt='n')#
 
@@ -1050,6 +1051,7 @@ idendro<-structure(function# Interactive Dendrogram
             axis(3,at=fetchedMapXs4Labels,labels='fetched',las=2,cex.axis=.7)
             if (dbg) cat(' ext.selected map plotted\n')
         }
+        par(opar)
     }
 
     ################
