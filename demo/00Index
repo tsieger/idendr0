@@ -1,0 +1,10 @@
+idendro                 dendrogram + heat map demo
+idendroSimple           dendrogram demo
+idendroWithScatter      dendrogram + heat map + interactive user-supplied scatter plot demo
+idendroWithScatterAndParcoord
+                        dendrogram + scatter plot + parallel coordinate plot integration demo
+idendroWithGgobi        dendrogram + heat map + GGobi scatter plot matrix demo
+idendroBig              dendrogram + heat map + scatter plot demo using big data
+idendroPersistent       persisting the clusters selected in the dendrogram demo
+idendroFlow             dendrogram + heat map of flow cytometry data
+idendroChondro          dendrogram + heat map + scatter plot + par.coord.plot of spectroscopy data

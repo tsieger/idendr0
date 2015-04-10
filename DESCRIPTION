@@ -1,0 +1,16 @@
+Package: idendr0
+Type: Package
+Title: Interactive dendrograms (backport of idendro to Tcl/Tk)
+Version: 1.4.1
+Date: 2015-04-10
+Author: Tomas Sieger
+Depends: tcltk
+Suggests: idendro, rggobi, DendSer
+URL: http://github.com/tsieger/idendr0
+Maintainer: Tomas Sieger <tomas.sieger@seznam.cz>
+Description: Interactive dendrogram that enables the user to select and
+    color clusters, to zoom and pan the dendrogram, and to visualize
+    the clustered data not only in a built-in heat map, but also in
+    GGobi interactive plots and user-supplied plots.
+License: GPL-2
+LazyLoad: yes
