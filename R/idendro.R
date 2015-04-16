@@ -522,7 +522,7 @@ idendro<-structure(function# Interactive Dendrogram
                     if (is.null(df$clusters[[i]])) {
                         cnt<-0
                     } else {
-                        cnt<-sum(df$brushed[df$clusters[[i]]$indices])
+                        cnt<-sum(df$brushed[df$clusters[[i]]$indices])+1
                     }
                     if (dbg) cat(sprintf('cluster %i: %s brushed leafs\n',i,cnt))
                     txt<-printClusterInfo(cnt)
@@ -544,7 +544,7 @@ idendro<-structure(function# Interactive Dendrogram
                 if (is.null(df$clusters[[i]])) {
                     cnt<-0
                 } else {
-                    cnt<-length(df$clusters[[i]]$indices)
+                    cnt<-length(df$clusters[[i]]$indices)+1
                 }
                 if (dbg) cat(sprintf('cluster %i: %s leafs\n',i,cnt))
                 txt<-printClusterInfo(cnt)
