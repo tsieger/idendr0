@@ -167,9 +167,9 @@ idendro<-structure(function# Interactive Dendrogram
     unselectedClusterColor='black',##<< the color of unselected dendrogram
     ## branches
 
-    maxClusterCount=length(clusterColors), ##<< the maximum number of
-    ## clusters user can select. If greater than the number of
-    ## 'clusterColors', cluster colors will get recycled.
+    maxClusterCount=max(length(clusterColors),ifelse(!is.null(clusters),max(clusters),0)), ##<< the
+    ## maximum number of clusters user can select. If greater than the number
+    ## of 'clusterColors', cluster colors will get recycled.
     ## This parameter affects the size of the GUI and the number of
     ## clusters that can be selected automatically by "cutting" the
     ## dendrogram.
@@ -267,7 +267,7 @@ idendro<-structure(function# Interactive Dendrogram
     dbg.dendro.cut<-1*dbg
     dbg.dendro.select<-0*dbg
     dbg.clustersArg<-1*dbg
-    dbg.colorizeCb<-0*dbg
+    dbg.colorizeCb<-1*dbg
     dbg.visibility<-0*dbg
     dbg.fetched<-1*dbg
     dbg.mouse<-0*dbg
@@ -458,8 +458,10 @@ idendro<-structure(function# Interactive Dendrogram
     df$fetchedMap<-df$emptyFetchedMap<-matrix(rep(0,n),nrow=1)
     # initialize clusters from user-supplied clusters argument, if any
     if (!is.null(clusters)) {
-      df<-createClustersFromLeafColors(df,clusters,maxClusterCount,dbg.dendro)
+        df<-createClustersFromLeafColors(df,clusters,maxClusterCount,dbg.dendro)
     }
+    df$leafColorIdxs<-computeLeafColorIdxs(df)
+
     if (dbg.dendro>1) printVar(df)
 
     # initialize heat map cutting points, so they stay constant
@@ -688,8 +690,6 @@ idendro<-structure(function# Interactive Dendrogram
     devHeight<-NA
 
     clusterCuttingHeight<-NA
-
-    df$leafColorIdxs<-unselectedLeafs<-rep(0,n)
 
     #
     # graphics coordinates conversions
@@ -1245,16 +1245,6 @@ idendro<-structure(function# Interactive Dendrogram
     #tkgrid(tkframe(tt),row=rowCurr,column=1,rowspan=1,columnspan=3)
     tkgrid(img,row=1,column=4,rowspan=rowCurr)
 
-    clusters2leafColors <- function(clusters) {
-        df$leafColorIdxs<-rep(0,n)
-        for (i in seq(along=df$clusters)) {
-            if (!is.null(df$clusters[[i]]) && length(df$clusters[[i]]$indices)>0) {
-                members<-computeMemberIndices(h,max(df$clusters[[i]]$indices))
-                df$leafColorIdxs[members]<-i
-            }
-        }
-        return(df$leafColorIdxs)
-    }
     mouse.down.impl <- function(x,y,actionType) {
         if (dbg) cat(paste('mouse.down.impl called, actionType',actionType,'\n'))
         if (dbg) printVar(c(x,y))
@@ -1532,7 +1522,7 @@ idendro<-structure(function# Interactive Dendrogram
     tkwait.window(tt)
 
     if (dbg>1) printVar(h$height)
-    return(invisible(clusters2leafColors(df$clusters)))
+    return(invisible(df$leafColorIdxs))
     ### vector of colors assigned to observations. 0s denote unselected
     ### observations, while values of i > 0 denote the cluster `i'.
 },ex=function() {
