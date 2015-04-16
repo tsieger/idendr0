@@ -26,16 +26,16 @@ interactivity and performance.
     vscale = 1.5, silent = FALSE, zoomFactor = 1/240, observationAnnotationEnabled = TRUE, 
     clusterColors = c("red", "green", "blue", "yellow", "magenta", 
         "cyan", "darkred", "darkgreen", "purple", "darkcyan"), 
-    unselectedClusterColor = "black", maxClusterCount = length(clusterColors), 
-    heatmapEnabled = TRUE, heatmapSmoothing = c("none", "cluster", 
-        "zoom"), heatmapColors = colorRampPalette(c("#00007F", 
+    unselectedClusterColor = "black", maxClusterCount = max(length(clusterColors), 
+        ifelse(!is.null(clusters), max(clusters), 0)), heatmapEnabled = TRUE, 
+    heatmapSmoothing = c("none", "cluster", "zoom"), heatmapColors = colorRampPalette(c("#00007F", 
         "blue", "#007FFF", "cyan", "#7FFF7F", "yellow", "#FF7F00", 
         "red", "#7F0000"))(10), doScaleHeatmap = TRUE, doScaleHeatmapByRows = FALSE, 
     heatmapRelSize = 0.2, colorizeCallback = NULL, fetchSelectedCallback = NULL, 
     brushedmapEnabled = !is.null(fetchSelectedCallback), brushedmapRelSize = ifelse(!is.null(x), 
         heatmapRelSize/ncol(x), 0.05), geometry = NULL, ggobi = FALSE, 
-    ggobiGlyphType = 1, ggobiFetchingStyle = "selected", ggobiColorScheme = "Paired 12", 
-    dbg = 0)}
+    ggobiGlyphType = 1, ggobiGlyphSize = 1, ggobiFetchingStyle = "selected", 
+    ggobiColorScheme = "Paired 12", dbg = 0)}
 \arguments{
   \item{h}{object of class 'stats::hclust' (or other class
 convertible to class 'hclust' by the 'as.hclust' function)
@@ -78,9 +78,9 @@ dendrogram/heat map?}
 of individual clusters}
   \item{unselectedClusterColor}{the color of unselected dendrogram
 branches}
-  \item{maxClusterCount}{the maximum number of
-clusters user can select. If greater than the number of
-'clusterColors', cluster colors will get recycled.
+  \item{maxClusterCount}{the
+maximum number of clusters user can select. If greater than the number
+of 'clusterColors', cluster colors will get recycled.
 This parameter affects the size of the GUI and the number of
 clusters that can be selected automatically by "cutting" the
 dendrogram.}
@@ -131,7 +131,8 @@ the 'hscale' and 'vscale' arguments instead.}
 and bidirectionally integrate with the plot? (defaults to FALSE
 as some users may not have ggobi available)}
   \item{ggobiGlyphType}{ggobi glyph type used to draw observations in
-ggobi}
+ggobi (defaults to a single pixel; see rggobi::glyph_type)}
+  \item{ggobiGlyphSize}{size of ggobi glyphs (see rggobi::glyph_size)}
   \item{ggobiFetchingStyle}{how should we recognize
 ggobi-selected observations to be fetched to idendro?
 Use 'selected' to fetch observations selected by ggobi brush,
