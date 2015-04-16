@@ -266,10 +266,10 @@ idendro<-structure(function# Interactive Dendrogram
     dbg.dendro<-1*dbg
     dbg.dendro.cut<-1*dbg
     dbg.dendro.select<-0*dbg
-    dbg.clustersArg<-dbg*01
-    dbg.colorizeCb<-dbg*0
-    dbg.visibility<-dbg*0
-    dbg.fetched<-dbg*0
+    dbg.clustersArg<-1*dbg
+    dbg.colorizeCb<-0*dbg
+    dbg.visibility<-0*dbg
+    dbg.fetched<-1*dbg
     dbg.mouse<-0*dbg
     dbg.geometry<-0*dbg
     dbg.ggobi<-0*dbg
@@ -511,7 +511,7 @@ idendro<-structure(function# Interactive Dendrogram
     updateBrushedClusterInfosOnChange<-function(df) {
         if (brushedmapEnabled) {
             # recompute number of leafs in each cluster
-            if (length(df$clusters)==0) {
+            if (length(df$clusters)==0 || length(df$brushed)==0) {
                 txt<-printClusterInfo(0)
                 for (i in 1:maxClusterCount) {
                     if (dbg) cat(sprintf('cluster %i: 0 brushed leafs\n',i))
@@ -522,7 +522,7 @@ idendro<-structure(function# Interactive Dendrogram
                     if (is.null(df$clusters[[i]])) {
                         cnt<-0
                     } else {
-                        cnt<-sum(df$brushed[df$clusters[[i]]$indices])+1
+                        cnt<-sum(df$leafColorIdxs==i & df$brushed)
                     }
                     if (dbg) cat(sprintf('cluster %i: %s brushed leafs\n',i,cnt))
                     txt<-printClusterInfo(cnt)
@@ -1114,12 +1114,18 @@ idendro<-structure(function# Interactive Dendrogram
             if (TRUE) {
                 # fetching in the brushed map only
                 df$brushed<<-fetchedLeafs<<-fetchSelectedCallback()
-                df$fetchedLeafCount<<-sum(fetchedLeafs)
-                tclvalue(clusterInfoBrushedOverviewVar)<-printClusterInfoBrushedOverview(df)
-                if (dbg.fetched) printVar(df$fetchedLeafCount)
-                df$fetchedMap<<-matrix(fetchedLeafs[df$leafOrder],nrow=1)
-                updateBrushedClusterInfosOnChange(df)
-                scalingReplot(img)
+                if (dbg.fetched) printVar(fetchedLeafs)
+                if (length(fetchedLeafs)!=df$n || !is.logical(fetchedLeafs)) {
+                    cat('error: fetchSelectedCallback returned invalid value\n')
+                } else {
+                    df$brushed<<-fetchedLeafs
+                    df$fetchedLeafCount<<-sum(fetchedLeafs)
+                    tclvalue(clusterInfoBrushedOverviewVar)<-printClusterInfoBrushedOverview(df)
+                    if (dbg.fetched) printVar(df$fetchedLeafCount)
+                    df$fetchedMap<<-matrix(fetchedLeafs[df$leafOrder],nrow=1)
+                    updateBrushedClusterInfosOnChange(df)
+                    scalingReplot(img)
+                }
             } else {
                 # fetching into the current cluster - DISABLED
 
