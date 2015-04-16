@@ -233,7 +233,9 @@ idendro<-structure(function# Interactive Dendrogram
     ## as some users may not have ggobi available)
 
     ggobiGlyphType=1, ##<< ggobi glyph type used to draw observations in
-    ## ggobi
+    ## ggobi (defaults to a single pixel; see rggobi::glyph_type)
+
+    ggobiGlyphSize=1, ##<< size of ggobi glyphs (see rggobi::glyph_size)
 
     ggobiFetchingStyle='selected', ##<< how should we recognize
     ## ggobi-selected observations to be fetched to idendro?
@@ -302,7 +304,9 @@ idendro<-structure(function# Interactive Dendrogram
             return(selection)
         }
 
-        library(rggobi)
+        if (!require(rggobi)) {
+            stop('The \'rggobi\' package is not installed, can\'t integrate with GGobi.')
+        }
         g<-ggobi(x)
         # set color scheme
         colorscheme(g)<-ggobiColorScheme
@@ -313,6 +317,7 @@ idendro<-structure(function# Interactive Dendrogram
         sapply(displays(g),close)
         # set the "pixel" draw style
         glyph_type(g[1])<-ggobiGlyphType
+        glyph_size(g[1])<-ggobiGlyphSize
         # draw scatterplot matrix of all parameters
         display(g[1],"Scatterplot Matrix")
 
