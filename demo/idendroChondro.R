@@ -1,5 +1,5 @@
 ## Visualization of spectroscopy data in dendrogram and heat map with
-## cranvas scatter plot and parallel coordinate plot integrated.
+## a scatter plot and parallel coordinate plot integrated.
 ##
 
 library(hyperSpec) # chondro data
