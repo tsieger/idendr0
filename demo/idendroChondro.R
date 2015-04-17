@@ -5,22 +5,31 @@
 library(hyperSpec) # chondro data
 library(MASS) # parcoord
 
-# extract data matrix
-x <- chondro [[]]
-# prepend 'x' in front of numeric dimnames
-colnames(x)<-paste('x',colnames(x),sep='')
+# preprocess chondro data
+cat('preprocessing the chondro data (it takes a while)\n')
+chondro <- spc.loess(chondro, newx = seq (602, 1800, by = 4))
+chondro <- chondro - spc.fit.poly.below(chondro)
+chondro <- sweep(chondro, 1, rowMeans(chondro), "/")
+overall.composition <- quantile(chondro, 0.05)
+chondro <- sweep(chondro, 2, overall.composition, "-")
 
 # HCA
-dx<-dist(x)
-hx<-hclust(dx)
+dst <- dist(chondro)
+dndr <- hclust(dst, method = "ward")
+
+# data frame construction
+df.chondro <- as.wide.df(chondro)
+colnames(df.chondro)[-(1:3)] <- paste("wl", colnames(df.chondro)[-(1:3)], sep = ".")
+names <- as.character(wl(chondro))
+names[wl(chondro) %% 50 != 0] <- ""
 
 # scatter plot
-plot(x[, "x602"], x[, "x606"], pch = 19)
+with(df.chondro, plot(x, y, pch = 19))
 p1<-dev.cur()
 
 # parallel coordinate plot
 dev.new()
-parcoord(x)
+parcoord(df.chondro[, !colnames(df.chondro) %in% 'clusters'])
 p2<-dev.cur()
 
 colorizeCallback<-function(clr) {
@@ -32,13 +41,15 @@ colorizeCallback<-function(clr) {
 
     # color the scatter plot
     dev.set(p1)
-    plot(x[, "x602"], x[, "x606"], pch = 19, col = clusterColors[clr + 1])
+    with(df.chondro, plot(x, y, pch = 19, col = clusterColors[clr + 1]))
 
     dev.set(p2)
-    parcoord(x, col = clusterColors[clr + 1])
+    parcoord(df.chondro[, !colnames(df.chondro) %in% 'clusters'], col = clusterColors[clr + 1])
 
     # restore the original current device
     dev.set(dv)
 }
 
-idendro(hx, x, colorizeCallback = colorizeCallback)
+# dendrogram
+idendro(dndr, df.chondro, heatmapRelSize = 0.75, heatmapColors = alois.palette(25),
+    colorizeCallback = colorizeCallback)
