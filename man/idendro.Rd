@@ -35,7 +35,7 @@ interactivity and performance.
     brushedmapEnabled = !is.null(fetchSelectedCallback), brushedmapRelSize = ifelse(!is.null(x), 
         heatmapRelSize/ncol(x), 0.05), geometry = NULL, ggobi = FALSE, 
     ggobiGlyphType = 1, ggobiGlyphSize = 1, ggobiFetchingStyle = "selected", 
-    ggobiColorScheme = "Paired 12", dbg = 0)}
+    ggobiColorScheme = "Paired 12", dbg = 0, ...)}
 \arguments{
   \item{h}{object of class 'stats::hclust' (or other class
 convertible to class 'hclust' by the 'as.hclust' function)
@@ -142,6 +142,8 @@ persistent brushing with a specific glyph type.}
 color observations in ggobi plots according to the clusters
 selected in the dendrogram}
   \item{dbg}{debug level (0=none, 1=brief, 2=verbose)}
+  \item{\dots}{additional graphical parameters to be passed to the
+dendrogram plot.}
 }
 \details{'idendro' displays an interactive dendrogram enriched, optionally,
 with a heat map and/or a brushed map.
