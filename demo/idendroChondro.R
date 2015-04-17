@@ -25,19 +25,19 @@ names[wl(chondro) %% 50 != 0] <- ""
 
 # scatter plot
 with(df.chondro, plot(x, y, pch = 19))
-p1<-dev.cur()
+p1 <- dev.cur()
 
 # parallel coordinate plot
 dev.new()
 parcoord(df.chondro[, !colnames(df.chondro) %in% 'clusters'])
-p2<-dev.cur()
+p2 <- dev.cur()
 
-colorizeCallback<-function(clr) {
-    clusterColors<-c('black','red','green','blue','yellow','magenta',
-        'cyan','darkred','darkgreen','purple','darkcyan')
+colorizeCallback <- function(clr) {
+    clusterColors <- c('black', 'red', 'green', 'blue', 'yellow', 'magenta',
+        'cyan', 'darkred', 'darkgreen', 'purple', 'darkcyan')
 
     # remember the current device
-    dv<-dev.cur()
+    dv <- dev.cur()
 
     # color the scatter plot
     dev.set(p1)
