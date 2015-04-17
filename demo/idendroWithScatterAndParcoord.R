@@ -1,13 +1,15 @@
 ## idendro + scatter plot + parallel coordinate plot integration demo.
 ##
 
+library(idendr0) # idendro
+
 data(iris)
 
 # perform hierarchical clustering analysis
 hc <- hclust(dist(iris[, 1:4]))
 
 # produce a scatter plot
-opar <- par(ask=FALSE)
+opar <- par(ask = FALSE, mai = par('mai') * c(1, 1, .5, 1))
 with(iris, plot(Sepal.Length, Sepal.Width, ty = 'p', pch = 19))
 scatterDevId <- dev.cur()
 par(opar)
@@ -16,7 +18,7 @@ par(opar)
 if (require(MASS)) {
     dev.new()
     parcoordDevId <- dev.cur()
-    opar <- par(ask = FALSE)
+    opar <- par(ask = FALSE, mai = par('mai') * c(.5, 1, 1, 1))
     iris.numeric <- iris
     iris.numeric$Species <- as.numeric(iris.numeric$Species)
     parcoord(iris.numeric)

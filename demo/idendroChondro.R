@@ -4,6 +4,7 @@
 
 library(hyperSpec) # chondro data
 library(MASS) # parcoord
+library(idendr0) # idendro
 
 # preprocess chondro data
 cat('preprocessing the chondro data (it takes a while)\n')

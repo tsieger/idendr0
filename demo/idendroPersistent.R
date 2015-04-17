@@ -1,6 +1,8 @@
 ## Demo on persisting the clusters selected in the dendrogram.
 ##
 
+library(idendr0) # idendro
+
 data(iris)
 
 # perform hierarchical clustering analysis

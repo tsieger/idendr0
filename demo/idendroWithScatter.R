@@ -1,13 +1,15 @@
 ## idendro + scatter plot integration demo.
 ##
 
+library(idendr0) # idendro
+
 data(iris)
 
 # perform hierarchical clustering analysis
 hc <- hclust(dist(iris[, 1:4]))
 
 # produce a scatter plot
-plot(iris$Sepal.Length, iris$Sepal.Width, ty='p', pch=19)
+plot(iris$Sepal.Length, iris$Sepal.Width, pch=19)
 
 
 colorizeCallback <- function(clr) {
@@ -15,7 +17,7 @@ colorizeCallback <- function(clr) {
     clusterColors <- c('black','red', 'green', 'blue', 'yellow', 'magenta',
         'cyan', 'darkred', 'darkgreen', 'purple', 'darkcyan')
     plot(iris$Sepal.Length, iris$Sepal.Width,
-        col = clusterColors[clr + 1], ty = 'p', pch = 19)
+        col = clusterColors[clr + 1], pch = 19)
 }
 
 # visualize clusters and heat map

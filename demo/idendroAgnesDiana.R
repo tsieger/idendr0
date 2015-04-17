@@ -2,7 +2,8 @@
 ## `cluster::diana'.
 ##
 
-library(cluster)
+library(idendr0) # idendro
+library(cluster) # agnes, diana
 
 data(iris)
 

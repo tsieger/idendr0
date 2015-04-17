@@ -4,6 +4,8 @@
 
 library(flowStats) # ITN
 library(RColorBrewer) # brewer.pal
+library(idendr0) # idendro
+
 data(ITN)
 
 # get data matrix

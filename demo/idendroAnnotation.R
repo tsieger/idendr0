@@ -2,6 +2,8 @@
 ## and case names in the heat map.
 ##
 
+library(idendr0) # idendro
+
 # generate data in feature space
 n <- 10
 x <- data.frame(very.long.dim.name1 = c(rnorm(n, -1), rnorm(n, 1)),
