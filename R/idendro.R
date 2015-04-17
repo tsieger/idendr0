@@ -247,7 +247,10 @@ idendro<-structure(function# Interactive Dendrogram
     ## color observations in ggobi plots according to the clusters
     ## selected in the dendrogram
 
-    dbg=0 ##<< debug level (0=none, 1=brief, 2=verbose)
+    dbg=0, ##<< debug level (0=none, 1=brief, 2=verbose)
+
+    ... ##<< additional graphical parameters to be passed to the
+    ## dendrogram plot.
     ) {
 
     #### required libraries
@@ -940,7 +943,7 @@ idendro<-structure(function# Interactive Dendrogram
         ## setup plot
         ##
         xlab<-paste('height',ifelse(!is.na(clusterCuttingHeight),paste(' (cutting at ',format(clusterCuttingHeight),')',sep=''),''),sep='')
-        opar<-par(ask=FALSE)
+        opar<-par(ask=FALSE,...)
         plot(c(max(h$height),-max(h$height)*heatmapRelSizeRelToDendro),c(0,n*1),type='n',
             frame.plot=T,fg='gray',ylab='',xlim=xlimIncludingMaps,xlab=xlab,ylim=ylim,yaxt="n",xaxs='i',yaxs='i',xaxt='n')
         # only positive x axis ticks make sense
