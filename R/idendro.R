@@ -455,7 +455,11 @@ idendro<-structure(function# Interactive Dendrogram
     }
 
     adaptHeatmapForDrawing<-function(x) {
-        t(x[,ncol(x):1])
+        if (is.null(x)) {
+            return(NULL)
+        } else {
+            return(t(x[,ncol(x):1]))
+        }
     }
 
     df<-prepareDendro(h,x,xOrig,FALSE,dbg.dendro)
@@ -923,6 +927,8 @@ idendro<-structure(function# Interactive Dendrogram
                 heatmapXs4Labels<-.5*diff(xlim)*heatmapRelSizeRelToDendro+xlim[2]
             }
             if (dbg.dendro.zoom) printVar(heatmapXs)
+        } else {
+            heatmapRelSizeRelToDendro<-heatmapRelSize
         }
         if (brushedmapEnabled) {
             # brushedmapRelSize is relative to dendro+heatmap+brushedmap
