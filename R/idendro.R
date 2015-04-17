@@ -942,7 +942,10 @@ idendro<-structure(function# Interactive Dendrogram
         xlab<-paste('height',ifelse(!is.na(clusterCuttingHeight),paste(' (cutting at ',format(clusterCuttingHeight),')',sep=''),''),sep='')
         opar<-par(ask=FALSE)
         plot(c(max(h$height),-max(h$height)*heatmapRelSizeRelToDendro),c(0,n*1),type='n',
-            frame.plot=T,fg='gray',ylab='',xlim=xlimIncludingMaps,xlab=xlab,ylim=ylim,yaxt="n",xaxs='i',yaxs='i')#,xaxt='n')#
+            frame.plot=T,fg='gray',ylab='',xlim=xlimIncludingMaps,xlab=xlab,ylim=ylim,yaxt="n",xaxs='i',yaxs='i',xaxt='n')
+        # only positive x axis ticks make sense
+        xl<-axTicks(1)
+        axis(1,xl[xl>=0])
 
         if (observationAnnotationEnabled) {
             axis(4,at=1:n,labels=df$observationLabelsOrdered,tick=FALSE,las=1,cex.axis=.7)
