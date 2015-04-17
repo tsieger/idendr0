@@ -476,14 +476,6 @@ idendro<-structure(function# Interactive Dendrogram
 
     if (dbg.dendro>1) printVar(df)
 
-    # initialize heat map cutting points, so they stay constant
-    # regardless of smoothing/zoom
-    if (heatmapEnabled) {
-        # border points: [X0,X1), [X1,X2), ... [Xn-1, Xn]
-        tmp<-as.matrix(df$xOrdered)
-        df$heatmapBorderPoints<-seq(min(tmp,na.rm=TRUE),max(tmp,na.rm=TRUE),len=heatmapColorCount+1)
-    }
-
     # observation annotations
     if (!is.null(x) && !is.null(rownames(x))) {
         df$observationLabelsOrdered<-rownames(x)
