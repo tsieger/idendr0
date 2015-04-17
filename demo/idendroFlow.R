@@ -1,5 +1,5 @@
 ## Visualization of flow cytometry data in dendrogram and heat
-## map, with cranvas scatter plots integrated.
+## map, with two scatter plots integrated.
 ##
 
 library(flowStats) # ITN
