@@ -1045,7 +1045,8 @@ idendro<-structure(function# Interactive Dendrogram
             jet.colors <-colorRampPalette(c("#00007F", "blue", "#007FFF", "cyan","#7FFF7F", "yellow", "#FF7F00", "red", "#7F0000"))
             image(x=heatmapXs,y=1:n,df$heatmap,add=T,col=jet.colors(20))
             dnames<-dimnames(df$heatmap)
-            if (!is.null(dnames) && !is.null(dnames[1])) {
+            if (dbg.heatmap) printVar(dnames)
+            if (!is.null(dnames) && !is.null(dnames[[1]])) {
                 #text(heatmapXs,ylimIncludingHeatMap[2],dnames[[2]],srt=90,pos=3,cex=.7,offset=c(1,0))
                 axis(3,at=heatmapXs4Labels,labels=dnames[[1]],las=2,cex.axis=.7)
             }
