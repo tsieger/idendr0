@@ -11,7 +11,6 @@ hc <- hclust(dist(iris[, 1:4]))
 # produce a scatter plot
 plot(iris$Sepal.Length, iris$Sepal.Width, pch=19)
 
-
 colorizeCallback <- function(clr) {
     # color the scatter plot according to the current clusters
     clusterColors <- c('black','red', 'green', 'blue', 'yellow', 'magenta',
