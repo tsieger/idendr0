@@ -18,11 +18,10 @@ x <- scale(x)
 cat('computing HCA (this takes a while)\n')
 hx <- hclust(dist(x), method = 'average')
 
-# plot scatter plots of selected data projections
-plot(x[,"CD3"], x[,"HLADr"], pch = 19)
+# setup scatter plots of selected data projections
+dev.new()
 sp1 <- dev.cur()
 dev.new()
-plot(x[,"CD8"], x[,"CD4"], pch = 19)
 sp2 <- dev.cur()
 
 clusterColors <- brewer.pal(12, "Paired")
@@ -35,6 +34,9 @@ colorizeCallback <- function(clr) {
     plot(x[,"CD8"], x[,"CD4"], pch = 19, col = c('black',clusterColors)[clr + 1])
     dev.set(d)
 }
+
+# produce the scatter plots by invoking the callback function with no specific colors
+colorizeCallback(0)
 
 # plot dendrogram + heat map
 cat('plotting dendrogram\n')

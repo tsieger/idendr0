@@ -24,21 +24,17 @@ colnames(df.chondro)[-(1:3)] <- paste("wl", colnames(df.chondro)[-(1:3)], sep = 
 names <- as.character(wl(chondro))
 names[wl(chondro) %% 50 != 0] <- ""
 
-# scatter plot
-with(df.chondro, plot(x, y, pch = 19))
+# setup a scatter plot
+dev.new()
 p1 <- dev.cur()
 
-# parallel coordinate plot
+# setup a parallel coordinate plot
 dev.new()
-parcoord(df.chondro[, !colnames(df.chondro) %in% 'clusters'])
 p2 <- dev.cur()
 
 colorizeCallback <- function(clr) {
     clusterColors <- c('black', 'red', 'green', 'blue', 'yellow', 'magenta',
         'cyan', 'darkred', 'darkgreen', 'purple', 'darkcyan')
-
-    # remember the current device
-    dv <- dev.cur()
 
     # color the scatter plot
     dev.set(p1)
@@ -46,10 +42,10 @@ colorizeCallback <- function(clr) {
 
     dev.set(p2)
     parcoord(df.chondro[, !colnames(df.chondro) %in% 'clusters'], col = clusterColors[clr + 1])
-
-    # restore the original current device
-    dev.set(dv)
 }
+
+# produce the two plots by invoking the callback function with no specific colors
+colorizeCallback(0)
 
 # dendrogram
 idendro(dndr, df.chondro, heatmapRelSize = 0.75, heatmapColors = alois.palette(25),
