@@ -11,10 +11,10 @@ GGobi interactive plots and user-supplied plots.}
 \tabular{ll}{Package: \tab idendr0\cr
 Type: \tab Package\cr
 Title: \tab Interactive dendrograms (backport of 'idendro' to base R graphics and Tcl/Tk GUI)\cr
-Version: \tab 1.4.4\cr
+Version: \tab 1.4.5\cr
 Date: \tab 2015-04-10\cr
 Author: \tab Tomas Sieger\cr
-Depends: \tab tcltk\cr
+Depends: \tab tcltk, tkrplot, grDevices\cr
 Suggests: \tab idendro, rggobi, DendSer, cluster, RColorBrewer, testthat\cr
 URL: \tab http://github.com/tsieger/idendr0\cr
 Maintainer: \tab Tomas Sieger <tomas.sieger@seznam.cz>\cr
