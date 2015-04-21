@@ -262,7 +262,7 @@ idendro<-structure(function# Interactive Dendrogram
     #### debugs
     ####
     # numeric (0=none, 1=brief, 2=verbose)
-    dbg.args<-01*dbg
+    dbg.args<-1*dbg
     dbg.dendro.zoom<-1*dbg
     dbg.pan<-dbg*1
     dbg.heatmap<-1*dbg
@@ -270,14 +270,13 @@ idendro<-structure(function# Interactive Dendrogram
     dbg.tx<-0*dbg
     dbg.dendro<-1*dbg
     dbg.dendro.cut<-1*dbg
-    dbg.dendro.select<-0*dbg
+    dbg.dendro.select<-1*dbg
     dbg.clustersArg<-1*dbg
     dbg.colorizeCb<-1*dbg
-    dbg.visibility<-0*dbg
     dbg.fetched<-1*dbg
     dbg.mouse<-0*dbg
     dbg.geometry<-0*dbg
-    dbg.ggobi<-0*dbg
+    dbg.ggobi<-1*dbg
 
     #### arguments handling
     ####
