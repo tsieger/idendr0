@@ -1,10 +1,10 @@
 Package: idendr0
 Type: Package
 Title: Interactive dendrograms (backport of 'idendro' to base R graphics and Tcl/Tk GUI)
-Version: 1.4.4
+Version: 1.4.5
 Date: 2015-04-10
 Author: Tomas Sieger
-Depends: tcltk
+Depends: tcltk, tkrplot, grDevices
 Suggests: idendro, rggobi, DendSer, cluster, RColorBrewer, testthat
 URL: http://github.com/tsieger/idendr0
 Maintainer: Tomas Sieger <tomas.sieger@seznam.cz>
