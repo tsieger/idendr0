@@ -1,0 +1,13 @@
+Version 1.4.6
+- hca5000 data man page added
+
+Version 1.4.5
+- missing demos added
+- tkrplot, grDevices dependencies added
+- subdebugs enabled
+
+Version 1.4.4
+- several bugs fixed
+
+Version 1.4.3
+- initial backport of idendro
