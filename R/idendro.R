@@ -557,7 +557,12 @@ idendro<-structure(function# Interactive Dendrogram
             for (i in seq(along=df$clusters)) {
                 if (is.null(df$clusters[[i]])) {
                     cnt<-0
+                } else if (length(df$clusters[[i]]$indices)==0) {
+                    cnt<-0
                 } else {
+                    # note the '+1' as the most bottom observation does not
+                    # form a (sub)cluster, so it is listed in the indices,
+                    # but it must be counted
                     cnt<-length(df$clusters[[i]]$indices)+1
                 }
                 if (dbg) cat(sprintf('cluster %i: %s leafs\n',i,cnt))
