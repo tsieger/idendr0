@@ -309,6 +309,8 @@ idendro<-structure(function# Interactive Dendrogram
         if (!require(rggobi)) {
             stop('The \'rggobi\' package is not installed, can\'t integrate with GGobi.')
         }
+        warning('Integrating with GGobi, ignoring the \'clusterColors\' argument: using colors from the \'',
+            ggobiColorScheme,'\' GGobi color scheme specified using the \'ggobiColorScheme\' argument.')
         g<-ggobi(x)
         # set color scheme
         colorscheme(g)<-ggobiColorScheme
