@@ -1104,7 +1104,7 @@ idendro<-structure(function# Interactive Dendrogram
     }
     deselectCurrentCluster<-function() {
         if (dbg) cat('deselectCurrentCluster called\n')
-        df$currentCluster<-as.numeric(tclvalue(currentCluster))
+        df$currentCluster<<-as.numeric(tclvalue(currentCluster))
         rv<-unselectCurrentCluster(df,dbg.dendro.select)
         if (rv$selectionChanged) {
             df<<-updateClustersOnChangePreDraw(rv$df)
