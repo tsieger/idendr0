@@ -347,7 +347,7 @@ idendro<-structure(function# Interactive Dendrogram
             # brushedmapEnabled not set - will be set accoriding to fetchSelectedCallback
             brushedmapRelSize=brushedmapRelSize,
             geometry=geometry,
-            ggobi=FALSE, # disabled on the recirsive call
+            ggobi=FALSE, # disabled on the recursive call
             ggobiGlyphType=ggobiGlyphType,
             ggobiFetchingStyle=ggobiFetchingStyle,
             ggobiColorScheme=ggobiColorScheme,
