@@ -413,10 +413,8 @@ idendro<-structure(function# Interactive Dendrogram
     }
 
     if (is.function(heatmapColors)) {
-        warning('[DEPRECATED:]\'heatmapColors\' argument of type \'function\', supply a color list instead')
-        heatmapColors<-heatmapColors(heatmapColorCount)
+        stop('\'heatmapColors\' argument of type \'function\' has been deprecated, please supply a color list instead')
     }
-    heatmapColorCount<-length(heatmapColors)
 
     # convert non-numeric data to numeric, if necessary
     if (heatmapEnabled) {
@@ -1055,8 +1053,7 @@ idendro<-structure(function# Interactive Dendrogram
             if (dbg.heatmap) printVar(dim(heatmapXs))
             if (dbg.heatmap) printVar(length(heatmapXs))
             if (dbg.heatmap) printVar(length(1:n))
-            jet.colors <-colorRampPalette(c("#00007F", "blue", "#007FFF", "cyan","#7FFF7F", "yellow", "#FF7F00", "red", "#7F0000"))
-            image(x=heatmapXs,y=1:n,df$heatmap,add=T,col=jet.colors(20))
+            image(x=heatmapXs,y=1:n,df$heatmap,add=T,col=heatmapColors)
             dnames<-dimnames(df$heatmap)
             if (dbg.heatmap) printVar(dnames)
             if (!is.null(dnames) && !is.null(dnames[[1]])) {
