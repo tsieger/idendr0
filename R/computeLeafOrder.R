@@ -9,10 +9,10 @@ computeLeafOrder<-function
 ) {
     # m = # of clusters
     m<-dim(merging)[1]
-    if (dbg) printWithName(m)
+    if (dbg) printVar(m)
     # n = # of leafs
     n<-m+1
-    if (dbg) printWithName(m)
+    if (dbg) printVar(m)
 
     # compute 'order'
     lifo<-rep(0,m)
@@ -43,7 +43,7 @@ computeLeafOrder<-function
             }
         }
     }
-    if (dbg) printWithName(ordering)
+    if (dbg) printVar(ordering)
     return(ordering)
     ### leaf ordering
 }
