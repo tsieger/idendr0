@@ -15,10 +15,14 @@ A list of 'x' and 'hx' elements.
 'hx' is an object of class 'hclust' containing the result of
 hierarchical cluster analysis performed on 'x'.
 }
-\usage{data(hca5000)}
+\usage{
+data(hca5000)
+}
 \examples{
+\donttest{
 library(idendr0)
 data(hca5000)
 idendro(hca5000$hx, hca5000$x, observationAnnotationEnabled = FALSE)
+}
 }
 \keyword{datasets}
