@@ -43,7 +43,7 @@ selectCluster<-function
 
     # subclusters
     subclusters<-computeSubclusterIndices(df$h,minI)
-    if (dbg) printWithName(subclusters)
+    if (dbg) printVar(subclusters)
     idx<-clusterId2SegmentIds(subclusters)
 
     # mark selected dendrogram segments
@@ -53,7 +53,7 @@ selectCluster<-function
 
     # unmark deselected subclusters
     unselectedIndices<-setdiff(1:df$clusterCount,subclusters)
-    if (dbg) printWithName(unselectedIndices)
+    if (dbg) printVar(unselectedIndices)
 
     # remove the branches selected from the other clusters
     for (i in seq(along=df$clusters)) {
@@ -68,7 +68,7 @@ selectCluster<-function
     }
 
     # remove branches of selected clusters from unselectedBranches
-    if (dbg) printWithName(unselectedIndices)
+    if (dbg) printVar(unselectedIndices)
     df$unselectedBranches$indices<-unselectedIndices
     idx<-clusterId2SegmentIds(unselectedIndices)
     df$unselectedBranches$branches<-with(df$allBranches$branches,data.frame(x1s=x1s[idx],x2s=x2s[idx],y1s=y1s[idx],y2s=y2s[idx]))
@@ -82,7 +82,7 @@ selectCluster<-function
       df<-dfOrig
     }
 
-    if (dbg>1) printWithName(df)
+    if (dbg>1) printVar(df)
     return(df)
     ### shared data frame
 }
