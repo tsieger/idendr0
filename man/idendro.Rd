@@ -23,19 +23,21 @@ package should be preferred, if available, for its better
 interactivity and performance.
 }
 \usage{idendro(h, x = NULL, qx = NULL, clusters = NULL, hscale = 1.5, 
-    vscale = 1.5, silent = FALSE, zoomFactor = 1/240, observationAnnotationEnabled = TRUE, 
+    vscale = 1.5, silent = FALSE, zoomFactor = 1/240, 
+    observationAnnotationEnabled = TRUE, 
     clusterColors = c("red", "green", "blue", "yellow", "magenta", 
         "cyan", "darkred", "darkgreen", "purple", "darkcyan"), 
     unselectedClusterColor = "black", maxClusterCount = max(length(clusterColors), 
         ifelse(!is.null(clusters), max(clusters), 0)), heatmapEnabled = TRUE, 
-    heatmapSmoothing = c("none", "cluster", "zoom"), heatmapColors = colorRampPalette(c("#00007F", 
-        "blue", "#007FFF", "cyan", "#7FFF7F", "yellow", "#FF7F00", 
-        "red", "#7F0000"))(10), doScaleHeatmap = TRUE, doScaleHeatmapByRows = FALSE, 
+    heatmapSmoothing = c("none", "cluster", "zoom"), 
+    heatmapColors = colorRampPalette(c("#00007F", "blue", "#007FFF", "cyan", 
+        "#7FFF7F", "yellow", "#FF7F00", "red", "#7F0000"))(10), 
+    doScaleHeatmap = TRUE, doScaleHeatmapByRows = FALSE, 
     heatmapRelSize = 0.2, colorizeCallback = NULL, fetchSelectedCallback = NULL, 
-    brushedmapEnabled = !is.null(fetchSelectedCallback), brushedmapRelSize = ifelse(!is.null(x), 
-        heatmapRelSize/ncol(x), 0.05), geometry = NULL, ggobi = FALSE, 
-    ggobiGlyphType = 1, ggobiGlyphSize = 1, ggobiFetchingStyle = "selected", 
-    ggobiColorScheme = "Paired 12", dbg = 0, ...)}
+    brushedmapEnabled = !is.null(fetchSelectedCallback), 
+    brushedmapRelSize = ifelse(!is.null(x), heatmapRelSize/ncol(x), 0.05), 
+    geometry = NULL, ggobi = FALSE, ggobiGlyphType = 1, ggobiGlyphSize = 1, 
+    ggobiFetchingStyle = "selected", ggobiColorScheme = "Paired 12", dbg = 0, ...)}
 \arguments{
   \item{h}{object of class 'stats::hclust' (or other class
 convertible to class 'hclust' by the 'as.hclust' function)
@@ -244,9 +246,9 @@ observations, while values of i > 0 denote the cluster `i'.}
 \seealso{idendro::idendro, stats::hclust, stats::plot.hclust
 }
 \examples{
-data(iris)
+\dontrun{
 hc <- hclust(dist(iris[, 1:4]))
 idendro(hc, iris)
-
+}
 # see demos for more examples
 }
