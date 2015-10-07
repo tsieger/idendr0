@@ -635,6 +635,8 @@ idendro<-structure(function# Interactive Dendrogram
     ###################################################################
     tt<-tcltk::tktoplevel()
 
+    done<-tclVar(0)
+
     ACTION_TYPE_SELECT<-'select'
     ACTION_TYPE_ZOOM<-'zoom'
     ACTION_TYPE_PAN<-'pan'
@@ -1180,7 +1182,7 @@ idendro<-structure(function# Interactive Dendrogram
     doQuit<-function() {
         if (dbg) cat('doQuit called\n')
         #tkconfigure(tt,cursor="top_left_arrow")
-        tkdestroy(tt)
+        tclvalue(done)<-1
     }
 
     img<-tkrplot(tt,replot,vscale=vscale,hscale=hscale)
@@ -1534,7 +1536,8 @@ idendro<-structure(function# Interactive Dendrogram
     }
 
     scalingReplot(img)
-    tkwait.window(tt)
+    tkwait.variable(done)
+    tkdestroy(tt)
 
     if (dbg>1) printVar(h$height)
     return(invisible(df$leafColorIdxs))
