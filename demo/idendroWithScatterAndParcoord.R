@@ -10,11 +10,13 @@ hc <- hclust(dist(iris[, 1:4]))
 
 # setup a scatter plot
 dev.new()
+par(ask = FALSE)
 scatterDevId <- dev.cur()
 
 # setup a parallel coordinate plot
 if (require(MASS)) {
     dev.new()
+    par(ask = FALSE)
     parcoordDevId <- dev.cur()
     iris.numeric <- iris
     iris.numeric$Species <- as.numeric(iris.numeric$Species)
