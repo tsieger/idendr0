@@ -1,3 +1,9 @@
+# idendr0 1.5.0.9000
+
+
+# idendr0 1.5.0
+-----------------------------------------------------------------------
+* initial version about to appear on CRAN
 # idendr0 1.5.0
 -----------------------------------------------------------------------
 * initial version about to appear on CRAN
