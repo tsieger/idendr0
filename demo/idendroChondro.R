@@ -26,10 +26,12 @@ names[wl(chondro) %% 50 != 0] <- ""
 
 # setup a scatter plot
 dev.new()
+par(ask = FALSE)
 p1 <- dev.cur()
 
 # setup a parallel coordinate plot
 dev.new()
+par(ask = FALSE)
 p2 <- dev.cur()
 
 colorizeCallback <- function(clr) {
