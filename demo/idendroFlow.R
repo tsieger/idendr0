@@ -20,8 +20,10 @@ hx <- hclust(dist(x), method = 'average')
 
 # setup scatter plots of selected data projections
 dev.new()
+par(ask = FALSE)
 sp1 <- dev.cur()
 dev.new()
+par(ask = FALSE)
 sp2 <- dev.cur()
 
 clusterColors <- brewer.pal(12, "Paired")
