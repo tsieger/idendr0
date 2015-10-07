@@ -8,6 +8,7 @@ data(iris)
 # perform hierarchical clustering analysis
 hc <- hclust(dist(iris[, 1:4]))
 
+opar <- par(ask = FALSE)
 # produce a scatter plot
 plot(iris$Sepal.Length, iris$Sepal.Width, pch=19)
 
@@ -23,3 +24,5 @@ colorizeCallback <- function(clr) {
 
 # visualize clusters and heat map
 idendro(hc, iris, colorizeCallback = colorizeCallback)
+
+par(opar)
