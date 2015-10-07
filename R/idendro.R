@@ -253,12 +253,6 @@ idendro<-structure(function# Interactive Dendrogram
     ## dendrogram plot.
     ) {
 
-    #### required libraries
-    ####
-    library(grDevices) # needed to generate jet palette by `colorRampPalette'
-    library(tcltk) # needed to make the UI
-    library(tkrplot) # needed to place R plot in TclTk window
-
     #### debugs
     ####
     # numeric (0=none, 1=brief, 2=verbose)
@@ -291,39 +285,39 @@ idendro<-structure(function# Interactive Dendrogram
         ggobiColorizeCallback<-function(colors) {
             if (dbg.ggobi>1) cat('ggobi colorizeCallback called\n')
             if (dbg.ggobi>1) printVar(colors)
-            glyph_color(g[1])<-(1+colors)
+            rggobi::glyph_color(g[1])<-(1+colors)
             if (!is.null(colorizeCallback)) colorizeCallback(colors)
         }
         ggobiFetchSelectedCallback<-function() {
             if (dbg.ggobi>1) cat('ggobi fetchSelectedCallback called\n')
             if (dbg.ggobi>1) cat(paste('fetching type: ',ggobiFetchingStyle,'\n'))
             if (ggobiFetchingStyle=='selected') {
-               selection<-selected(g[1])
+               selection<-rggobi::selected(g[1])
             } else {
-                selection<-(glyph_type(g[1])==ggobiFetchingStyle)
+                selection<-(rggobi::glyph_type(g[1])==ggobiFetchingStyle)
             }
             if (dbg.ggobi>1) printVar(selection)
             return(selection)
         }
 
-        if (!require(rggobi)) {
+        if (!requireNamespace("rggobi",quietly=TRUE)) {
             stop('The \'rggobi\' package is not installed, can\'t integrate with GGobi.')
         }
         warning('Integrating with GGobi, ignoring the \'clusterColors\' argument: using colors from the \'',
             ggobiColorScheme,'\' GGobi color scheme specified using the \'ggobiColorScheme\' argument.')
-        g<-ggobi(x)
+        g<-rggobi::ggobi(x)
         # set color scheme
-        colorscheme(g)<-ggobiColorScheme
+        rggobi::colorscheme(g)<-ggobiColorScheme
         # read the ggobi color scheme colors in order to use the same colors in the dendrogram
-        cols<-sapply(colorscheme(g)$colors,function(x)rgb(x[1],x[2],x[3]))
+        cols<-sapply(rggobi::colorscheme(g)$colors,function(x)rgb(x[1],x[2],x[3]))
         if (dbg.ggobi) printVar(cols)
         # close the default display(s)
-        sapply(displays(g),close)
+        sapply(rggobi::displays(g),close)
         # set the "pixel" draw style
-        glyph_type(g[1])<-ggobiGlyphType
-        glyph_size(g[1])<-ggobiGlyphSize
+        rggobi::glyph_type(g[1])<-ggobiGlyphType
+        rggobi::glyph_size(g[1])<-ggobiGlyphSize
         # draw scatterplot matrix of all parameters
-        display(g[1],"Scatterplot Matrix")
+        rggobi::display(g[1],"Scatterplot Matrix")
 
         rv<-idendro(
             h=h,
@@ -474,7 +468,7 @@ idendro<-structure(function# Interactive Dendrogram
     df$heatmap<-adaptHeatmapForDrawing(df$xOrdered)
     df$fetchedBranches<-df$noBranches<-list(indices=c(),branches=data.frame(x1s=c(),x2s=c(),y1s=c(),y2s=c()))
     df$fetchedLeafCount<-0
-    df$fetchedInfo<-NULL
+    fetchedInfo<-NULL
     df$fetchedMap<-df$emptyFetchedMap<-matrix(rep(0,n),nrow=1)
     # initialize clusters from user-supplied clusters argument, if any
     if (!is.null(clusters)) {
@@ -639,7 +633,7 @@ idendro<-structure(function# Interactive Dendrogram
     ###################################################################
     ## start of graphics
     ###################################################################
-    tt<-tktoplevel()
+    tt<-tcltk::tktoplevel()
 
     ACTION_TYPE_SELECT<-'select'
     ACTION_TYPE_ZOOM<-'zoom'
@@ -670,7 +664,7 @@ idendro<-structure(function# Interactive Dendrogram
 
     ## full (maximal) limits of full zoom-out
     fullXlim<-c(max(h$height),0)
-    fullYlim<<-.5+c(0,n)
+    fullYlim<-.5+c(0,n)
     # current drawing limits
     xlim<-stillXlim<-fullXlim
     ylim<-stillYlim<-fullYlim
@@ -699,6 +693,7 @@ idendro<-structure(function# Interactive Dendrogram
     panEndXY<-c(NA,NA)
     panShiftXY<-c(NA,NA)
 
+    plotRegionUsrCoords<-rep(NA,4)
     plotRegionDevRel<-rep(NA,4)
     # the number the replot() has been called (if more than 1 times, fixed to 2)
     callCount<-0
@@ -879,22 +874,20 @@ idendro<-structure(function# Interactive Dendrogram
             if (dbg.geometry) printVar(windowHeight)
             if (dbg.geometry) printVar(imgWidth)
             if (dbg.geometry) printVar(imgHeight)
-            if (dbg.geometry) printVar(guiWidth)
-            if (abs(w-guiWidth-imgWidth)>10 || abs(h-imgHeight)>10) {
-                if (FALSE) { # disabled, not working, TODO
-                # the problem is that one an image is created by tkrplot,
-                # it is of fixed size, see help for tkrplot:
-                #
-                #   The function 'tkrplot' creates and returns a Tk label
-                #   widget containing a Tk image of type Rplot.  For now
-                #   the size is hard-wired. 
-
-                hscale<<-vscale<<-min((w-guiWidth)/imgWidth,h/imgHeight)
-                if (dbg.geometry) printVar(vscale)
-                if (dbg.geometry) printVar(hscale)
-                scalingReplot(img)
-                }
-            }
+            #if (dbg.geometry) printVar(guiWidth)
+            # disabled, not working, TODO
+            # the problem is that one an image is created by tkrplot,
+            # it is of fixed size, see help for tkrplot:
+            #
+            #   The function 'tkrplot' creates and returns a Tk label
+            #   widget containing a Tk image of type Rplot.  For now
+            #   the size is hard-wired. 
+            #if (abs(w-guiWidth-imgWidth)>10 || abs(h-imgHeight)>10) {
+            #    hscale<<-vscale<<-min((w-guiWidth)/imgWidth,h/imgHeight)
+            #    if (dbg.geometry) printVar(vscale)
+            #    if (dbg.geometry) printVar(hscale)
+            #    scalingReplot(img)
+            #}
         }
     }
 
@@ -1135,7 +1128,7 @@ idendro<-structure(function# Interactive Dendrogram
         if (!is.null(fetchSelectedCallback)) {
             if (TRUE) {
                 # fetching in the brushed map only
-                df$brushed<<-fetchedLeafs<<-fetchSelectedCallback()
+                df$brushed<<-fetchedLeafs<-fetchSelectedCallback()
                 if (dbg.fetched) printVar(fetchedLeafs)
                 if (length(fetchedLeafs)!=df$n || !is.logical(fetchedLeafs)) {
                     cat('error: fetchSelectedCallback returned invalid value\n')
@@ -1156,7 +1149,7 @@ idendro<-structure(function# Interactive Dendrogram
                 if (!is.null(df$clusters) && length(df$clusters)>=i && length(df$clusters[[i]]$indices)>0) {
                     if (!silent) tkmessageBox(message=sprintf("Can't fetch into the current cluster, it is not empty. Select another cluster."))
                 } else {
-                    fetchedLeafs<<-fetchSelectedCallback()
+                    fetchedLeafs<-fetchSelectedCallback()
                     df$fetchedLeafCount<<-sum(fetchedLeafs)
                     if (dbg.fetched) printVar(df$fetchedLeafCount)
                     if (df$fetchedLeafCount) {
@@ -1548,7 +1541,7 @@ idendro<-structure(function# Interactive Dendrogram
     ### vector of colors assigned to observations. 0s denote unselected
     ### observations, while values of i > 0 denote the cluster `i'.
 },ex=function() {
-    data(iris)
+    data(iris, envir = environment())
     hc <- hclust(dist(iris[, 1:4]))
     idendro(hc, iris)
 
