@@ -1,1 +1,7 @@
 export(idendro)
+
+import(tcltk)
+import(tkrplot)
+importFrom(grDevices,colorRampPalette,rgb)
+importFrom(graphics,axTicks,axis,image,lines,par,plot)
+importFrom(stats,as.hclust,cutree,heatmap)

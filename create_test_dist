@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Create a package archive and test it using "R CMD check --as-cran".
+
+TMP=tmp
+
+R CMD build . | tee ${TMP} &&
+{ 
+    ARCHIVE=`tail -n 1 ${TMP} | sed "s/\(.*'\)\([^']*\)'/\2/"`
+    rm "${TMP}"
+    R CMD check --as-cran "${ARCHIVE}"
+}

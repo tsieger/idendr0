@@ -1,0 +1,22 @@
+^.gitignore$
+
+^man/.*patch$
+^man/.*orig$
+^man/.*rej$
+
+# .md files
+^cran-comments\.md$
+^NEWS.md$
+
+^idendr0.*tar.gz$
+^idendr0\.Rcheck$
+^release_HOWTO.txt$
+tmp
+
+# scripts
+^version_update$
+^create_test_dist$
+^create_test_dist\.old$
+^test_dist$
+^fix_man$
+^make_NEWS$
