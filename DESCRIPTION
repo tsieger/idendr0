@@ -9,6 +9,7 @@ Imports: tcltk, tkrplot, grDevices, graphics, stats
 Suggests: rggobi, DendSer, cluster, RColorBrewer, datasets
 URL: http://github.com/tsieger/idendr0
 Maintainer: Tomas Sieger <tomas.sieger@seznam.cz>
+BugReports: https://github.com/tsieger/idendr0/issues
 Description: Interactive dendrogram that enables the user to select and
     color clusters, to zoom and pan the dendrogram, and to visualize
     the clustered data not only in a built-in heat map, but also in
