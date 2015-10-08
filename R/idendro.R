@@ -303,6 +303,7 @@ idendro<-structure(function# Interactive Dendrogram
         if (!requireNamespace("rggobi",quietly=TRUE)) {
             stop('The \'rggobi\' package is not installed, can\'t integrate with GGobi.')
         }
+        attachNamespace("rggobi")
         warning('Integrating with GGobi, ignoring the \'clusterColors\' argument: using colors from the \'',
             ggobiColorScheme,'\' GGobi color scheme specified using the \'ggobiColorScheme\' argument.')
         g<-rggobi::ggobi(x)
