@@ -1,8 +1,8 @@
 # idendr0
 
-idendr0 is an interactive dendrogram that enables the user to select 
+'idendr0' is an interactive dendrogram that enables the user to select 
 and color clusters, to zoom and pan the dendrogram, and to visualize 
-the clustered data not only in a built-in heat map, but also in GGobi 
+the clustered data not only in a built-in heat map, but also in 'GGobi' 
 interactive plots and user-supplied plots. 
 
 idendr0 is a backport of 'idendro' (https://github.com/tsieger/idendro) 
