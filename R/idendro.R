@@ -303,7 +303,18 @@ idendro<-structure(function# Interactive Dendrogram
         if (!requireNamespace("rggobi",quietly=TRUE)) {
             stop('The \'rggobi\' package is not installed, can\'t integrate with GGobi.')
         }
-        attachNamespace("rggobi")
+        # We need to attach "rggobi", otherwise thw following error gets thrown from ggobi:
+        #  Error in .RGtkCall("R_setGObjectProps", obj, value, PACKAGE = "RGtk2") :
+        #    Invalid property 1!
+        # However, in order to keep the search path intact after the call to idendro(),
+        # we attempt to unload "rggobi" later (see below).
+        if (!"package:rggobi"%in%search()) {
+          attachNamespace("rggobi")
+          ggobiAttached<-TRUE
+        } else {
+          ggobiAttached<-FALSE
+        }
+
         warning('Integrating with GGobi, ignoring the \'clusterColors\' argument: using colors from the \'',
             ggobiColorScheme,'\' GGobi color scheme specified using the \'ggobiColorScheme\' argument.')
         g<-rggobi::ggobi(x)
@@ -353,6 +364,11 @@ idendro<-structure(function# Interactive Dendrogram
         # wait until the user closes the dendrogram,
         # and close ggobi as well
         close(g)
+
+        # unload "rggobi" not to alter the search path
+        if (ggobiAttached) {
+          unloadNamespace("rggobi")
+        }
 
         return(invisible(rv))
     }
