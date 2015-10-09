@@ -151,8 +151,7 @@ idendro<-structure(function# Interactive Dendrogram
     vscale=1.5, ##<< vertical scaling factor of the dendrogram
     ## figure. See 'hscale'.
 
-    silent=FALSE, ##<< if TRUE, no informative message boxes will be
-    ## drawn.
+    silent=FALSE, ##<< if TRUE, no informative messages will be shown
 
     zoomFactor=1/240, ##<<the amount of zoom in/out as controlled by the
     ## mouse wheel
@@ -315,8 +314,10 @@ idendro<-structure(function# Interactive Dendrogram
           ggobiAttached<-FALSE
         }
 
-        warning('Integrating with GGobi, ignoring the \'clusterColors\' argument: using colors from the \'',
-            ggobiColorScheme,'\' GGobi color scheme specified using the \'ggobiColorScheme\' argument.')
+        if (!silent) {
+            message('Note: integrating with GGobi, ignoring the \'clusterColors\' argument: using colors from the \'',
+                ggobiColorScheme,'\' GGobi color scheme specified using the \'ggobiColorScheme\' argument.')
+        }
         g<-rggobi::ggobi(x)
         # set color scheme
         rggobi::colorscheme(g)<-ggobiColorScheme
@@ -404,7 +405,9 @@ idendro<-structure(function# Interactive Dendrogram
     }
 
     if (is.unsorted(h$height)) {
-        warning('Non-monotone distance detected, applying a simple workaround. Consider using clustering with monotone distance.')
+        if (!silent) {
+            message('Note: non-monotone distance detected, applying a simple workaround. Consider using clustering with monotone distance.')
+        }
         # 1  4  2  7  6  5  8  9  # h$height
         #    3 -2  5 -1 -1  3  1  # tmp<-diff(h$height),  min(tmp[tmp>0]) = 1
         #    2 -3  4 -2 -2  2  0  # tmp2<-tmp-min(tmp[tmp>0]
@@ -438,7 +441,9 @@ idendro<-structure(function# Interactive Dendrogram
             }
         }
         if (nonNumericColumnFound) {
-            warning('Non-numeric data found, converting to numeric (in order to enable heatmap drawing).')
+            if (!silent) {
+                message('Note: non-numeric data found, converting to numeric (in order to enable heatmap drawing).')
+            }
         }
 
         if (is.data.frame(x)) {
