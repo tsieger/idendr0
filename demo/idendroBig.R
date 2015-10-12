@@ -3,7 +3,6 @@
 ##
 
 library(idendr0) # hca5000, idendro
-library(rggobi) # ggobi
 
 # load "big data"
 data(hca5000)
