@@ -2,7 +2,6 @@
 ##
 
 library(idendr0) # idendro
-library(rggobi) # ggobi
 
 data(iris)
 
