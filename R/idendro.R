@@ -548,8 +548,8 @@ idendro<-structure(function# Interactive Dendrogram
                     eval(parse(text=paste('tclvalue(clusterBrushedInfo',as.character(i),')<-',txt,sep='')))
                 }
             } else {
-                for (i in seq(along=df$clusters)) {
-                    if (is.null(df$clusters[[i]])) {
+                for (i in 1:maxClusterCount) {
+                    if (i>length(df$clusters) || is.null(df$clusters[[i]])) {
                         cnt<-0
                     } else {
                         cnt<-sum(df$leafColorIdxs==i & df$brushed)
