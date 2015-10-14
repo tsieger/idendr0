@@ -1,9 +1,10 @@
-# idendr0 1.5.0.9000
-
-
-# idendr0 1.5.0
+# idendr0 1.5.1
 -----------------------------------------------------------------------
-* initial version about to appear on CRAN
+* 'rggobi' package usage fixed
+* informative warnings turned into notes
+* a bug in "brushed cluster info" fixed
+
+
 # idendr0 1.5.0
 -----------------------------------------------------------------------
 * initial version about to appear on CRAN
@@ -17,7 +18,7 @@
 # idendr0 1.4.5
 -----------------------------------------------------------------------
 * missing demos added
-* tkrplot, grDevices dependencies added
+* 'tkrplot', 'grDevices' dependencies added
 * subdebugs enabled
 
 
@@ -28,6 +29,6 @@
 
 # idendr0 1.4.3
 -----------------------------------------------------------------------
-* initial backport of idendro to base R graphics and Tcl/Tk GUI
+* initial backport of 'idendro' to base R graphics and Tcl/Tk GUI
   (the version number picked to parallel that of 'idendro'
   (https://github.com/tsieger/idendro))
