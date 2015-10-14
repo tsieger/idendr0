@@ -69,8 +69,7 @@ hscale of more than 100\% is preferred to make the dendrogram
 large enough.}
   \item{vscale}{vertical scaling factor of the dendrogram
 figure. See 'hscale'.}
-  \item{silent}{if TRUE, no informative message boxes will be
-drawn.}
+  \item{silent}{if TRUE, no informative messages will be shown}
   \item{zoomFactor}{the amount of zoom in/out as controlled by the
 mouse wheel}
   \item{observationAnnotationEnabled}{shall the names of individual
