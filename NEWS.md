@@ -1,4 +1,4 @@
-# idendr0 1.5.1.9000
+# idendr0 1.5.2
 -----------------------------------------------------------------------
 * interactive examples made conditional on 'interactive()' (instead of 
   wrapped in '\donttest{}')

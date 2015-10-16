@@ -1,8 +1,8 @@
 Package: idendr0
 Type: Package
 Title: Interactive Dendrograms
-Version: 1.5.1.9000
-Date: 2015-10-14
+Version: 1.5.2
+Date: 2015-10-16
 Author: Tomas Sieger
 Depends:
 Imports: tcltk, tkrplot, grDevices, graphics, stats
