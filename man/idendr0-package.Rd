@@ -13,7 +13,7 @@ This is a backport of Qt-based 'idendro'
 \tabular{ll}{Package: \tab idendr0\cr
 Type: \tab Package\cr
 Title: \tab Interactive Dendrograms\cr
-Version: \tab 1.5.2\cr
+Version: \tab 1.5.2.9000\cr
 Date: \tab 2015-10-16\cr
 Author: \tab Tomas Sieger\cr
 Depends: \tab \cr

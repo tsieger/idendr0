@@ -1,7 +1,7 @@
 Package: idendr0
 Type: Package
 Title: Interactive Dendrograms
-Version: 1.5.2
+Version: 1.5.2.9000
 Date: 2015-10-16
 Author: Tomas Sieger
 Depends:
