@@ -1,0 +1,45 @@
+*** idendro.Rd	Tue Oct  6 21:34:19 2015
+--- idendro.Rd2	Tue Oct  6 21:34:48 2015
+***************
+*** 23,41 ****
+  interactivity and performance.
+  }
+  \usage{idendro(h, x = NULL, qx = NULL, clusters = NULL, hscale = 1.5, 
+!     vscale = 1.5, silent = FALSE, zoomFactor = 1/240, observationAnnotationEnabled = TRUE, 
+      clusterColors = c("red", "green", "blue", "yellow", "magenta", 
+          "cyan", "darkred", "darkgreen", "purple", "darkcyan"), 
+      unselectedClusterColor = "black", maxClusterCount = max(length(clusterColors), 
+          ifelse(!is.null(clusters), max(clusters), 0)), heatmapEnabled = TRUE, 
+!     heatmapSmoothing = c("none", "cluster", "zoom"), heatmapColors = colorRampPalette(c("#00007F", 
+!         "blue", "#007FFF", "cyan", "#7FFF7F", "yellow", "#FF7F00", 
+!         "red", "#7F0000"))(10), doScaleHeatmap = TRUE, doScaleHeatmapByRows = FALSE, 
+      heatmapRelSize = 0.2, colorizeCallback = NULL, fetchSelectedCallback = NULL, 
+!     brushedmapEnabled = !is.null(fetchSelectedCallback), brushedmapRelSize = ifelse(!is.null(x), 
+!         heatmapRelSize/ncol(x), 0.05), geometry = NULL, ggobi = FALSE, 
+!     ggobiGlyphType = 1, ggobiGlyphSize = 1, ggobiFetchingStyle = "selected", 
+!     ggobiColorScheme = "Paired 12", dbg = 0, ...)}
+  \arguments{
+    \item{h}{object of class 'stats::hclust' (or other class
+  convertible to class 'hclust' by the 'as.hclust' function)
+--- 23,43 ----
+  interactivity and performance.
+  }
+  \usage{idendro(h, x = NULL, qx = NULL, clusters = NULL, hscale = 1.5, 
+!     vscale = 1.5, silent = FALSE, zoomFactor = 1/240, 
+!     observationAnnotationEnabled = TRUE, 
+      clusterColors = c("red", "green", "blue", "yellow", "magenta", 
+          "cyan", "darkred", "darkgreen", "purple", "darkcyan"), 
+      unselectedClusterColor = "black", maxClusterCount = max(length(clusterColors), 
+          ifelse(!is.null(clusters), max(clusters), 0)), heatmapEnabled = TRUE, 
+!     heatmapSmoothing = c("none", "cluster", "zoom"), 
+!     heatmapColors = colorRampPalette(c("#00007F", "blue", "#007FFF", "cyan", 
+!         "#7FFF7F", "yellow", "#FF7F00", "red", "#7F0000"))(10), 
+!     doScaleHeatmap = TRUE, doScaleHeatmapByRows = FALSE, 
+      heatmapRelSize = 0.2, colorizeCallback = NULL, fetchSelectedCallback = NULL, 
+!     brushedmapEnabled = !is.null(fetchSelectedCallback), 
+!     brushedmapRelSize = ifelse(!is.null(x), heatmapRelSize/ncol(x), 0.05), 
+!     geometry = NULL, ggobi = FALSE, ggobiGlyphType = 1, ggobiGlyphSize = 1, 
+!     ggobiFetchingStyle = "selected", ggobiColorScheme = "Paired 12", dbg = 0, ...)}
+  \arguments{
+    \item{h}{object of class 'stats::hclust' (or other class
+  convertible to class 'hclust' by the 'as.hclust' function)
