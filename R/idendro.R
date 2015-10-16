@@ -1566,9 +1566,10 @@ idendro<-structure(function# Interactive Dendrogram
     ### vector of colors assigned to observations. 0s denote unselected
     ### observations, while values of i > 0 denote the cluster `i'.
 },ex=function() {
-    data(iris, envir = environment())
-    hc <- hclust(dist(iris[, 1:4]))
-    idendro(hc, iris)
-
+    if (interactive()) {
+        data(iris, envir = environment())
+        hc <- hclust(dist(iris[, 1:4]))
+        idendro(hc, iris)
+    }
     # see demos for more examples
 })
