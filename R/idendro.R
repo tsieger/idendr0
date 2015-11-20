@@ -1549,7 +1549,7 @@ idendro<-structure(function# Interactive Dendrogram
     tkbind(tt, "A", deselectAllClusters)
     tkbind(tt, "s", undoSelection)
     tkbind(tt, "S", undoSelection)
-    tkbind(tt, "q", doQuit) ##TODO: send event instead of destroying in order to get rid of the error "Bad window path name"?
+    tkbind(tt, "q", doQuit)
     tkbind(tt, "Q", doQuit)
     for (i in 1:max(9,maxClusterCount)) {
         tkbind(tt, as.character(i), eval(parse(text=paste("function() {tclvalue(currentCluster)<-",i,"}"))))
