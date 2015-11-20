@@ -701,10 +701,7 @@ idendro<-structure(function# Interactive Dendrogram
     zoomTopLeftXY<-c(NA,NA)
     zoomBottomRightXY<-c(NA,NA)
 
-    # has plot been zoomed or panned (if yes, we need to refresh the
-    # physical<->user coordinate mapping)
     zoomed<-FALSE
-    panned<-FALSE
 
     # during the "zoom rectangle selection" this is
     # the current zooming bottom right corner:
@@ -719,8 +716,6 @@ idendro<-structure(function# Interactive Dendrogram
 
     plotRegionUsrCoords<-rep(NA,4)
     plotRegionDevRel<-rep(NA,4)
-    # the number the replot() has been called (if more than 1 times, fixed to 2)
-    callCount<-0
 
     devWidth<-NA
     devHeight<-NA
@@ -967,6 +962,11 @@ idendro<-structure(function# Interactive Dendrogram
         }
         if (dbg.dendro.zoom) printVar(xlimIncludingMaps)
 
+        if (zoomed) {
+            clusterCuttingHeight<<-NA
+            zoomed<<-FALSE
+        }
+
         ##
         ## setup plot
         ##
@@ -982,18 +982,10 @@ idendro<-structure(function# Interactive Dendrogram
             axis(4,at=1:n,labels=df$observationLabelsOrdered,tick=FALSE,las=1,cex.axis=.7)
         }
 
-        if (callCount<2) {
-            callCount<<-callCount+1
-            if (callCount==1) {
-                plotRegionDevRel<<-par("plt")
-                if (dbg.dendro.zoom) printVar(plotRegionDevRel)
-            }
-        }
-
-        if (zoomed || panned || callCount==2) {
-            plotRegionUsrCoords<<-par("usr")
-            if (dbg.dendro.zoom) printVar(plotRegionUsrCoords)
-        }
+        plotRegionDevRel<<-par("plt")
+        if (dbg.dendro.zoom) printVar(plotRegionDevRel)
+        plotRegionUsrCoords<<-par("usr")
+        if (dbg.dendro.zoom) printVar(plotRegionUsrCoords)
 
         if (dbg.geometry>1) {
             print((tkwinfo("geometry",tt)))
@@ -1104,6 +1096,7 @@ idendro<-structure(function# Interactive Dendrogram
             ylim<<-stillYlim<<-rv$dendroZoom$ylim
             plotRegionUsrCoords<<-rv$dendroZoom$plotRegionUsrCoords
             df<<-updateHeatmap(rv$df)
+            zoomed<<-TRUE
             scalingReplot(img)
         } else {
             if (dbg) cat('no zoom lim history\n')
@@ -1116,6 +1109,7 @@ idendro<-structure(function# Interactive Dendrogram
         #zoomTopLeftXY<<-zoomBottomRightXY<<-c(NA,NA)
         xlim<<-stillXlim<<-fullXlim
         ylim<<-stillYlim<<-fullYlim
+        zoomed<<-TRUE
         scalingReplot(img)
     }
     deselectCurrentCluster<-function() {
@@ -1207,7 +1201,6 @@ idendro<-structure(function# Interactive Dendrogram
         tclvalue(done)<-1
     }
 
-    img<-tkrplot(tt,replot,vscale=vscale,hscale=hscale)
     # TODO: set geometry according to hscale,vscale?
     if (!is.null(geometry)) {
         tkwm.geometry(tt,sprintf('%dx%d+%d+%d',geometry[3],geometry[4],geometry[1],geometry[2]))
@@ -1215,8 +1208,13 @@ idendro<-structure(function# Interactive Dendrogram
     # to get a list of possible options, use:
     #printVar(tkwinfo(tt,"screenwidth"))
 
+    # create 'img', which involves calling 'replot'
+    img<-tkrplot(tt,replot,vscale=vscale,hscale=hscale)
+    # setup 'devWidth' and 'devHeight' which are needed to map
+    # device<->user coordinates in event handlers bound to 'img' later
     devWidth<-as.numeric(tclvalue(tkwinfo("reqwidth",img)))
     devHeight<-as.numeric(tclvalue(tkwinfo("reqheight",img)))
+
     #tkconfigure(tt,cursor="ul_angle")
     clusterHeadingVar<-tclVar()
     tclvalue(clusterHeadingVar)<-"cluster"
@@ -1418,7 +1416,6 @@ idendro<-structure(function# Interactive Dendrogram
                 if (dbg.pan) cat('clearing panning variables\n')
                 panStartXY<<-panEndXY<<-panShiftXY<<-c(NA,NA)
                 df<<-updateHeatmap(df)
-                panned<-TRUE
                 scalingReplot(img)
             } else {
                 if (dbg.pan) cat('clearing panning variables\n')
@@ -1458,6 +1455,7 @@ idendro<-structure(function# Interactive Dendrogram
                     scalingReplot(img)
                 }
             } else if (!is.na(lastClusterCuttingHeight)) {
+                clusterCuttingHeight<<-NA
                 scalingReplot(img)
             }
         } else if (actionType==ACTION_TYPE_ZOOM) {
@@ -1557,7 +1555,6 @@ idendro<-structure(function# Interactive Dendrogram
         tkbind(tt, as.character(i), eval(parse(text=paste("function() {tclvalue(currentCluster)<-",i,"}"))))
     }
 
-    scalingReplot(img)
     tkwait.variable(done)
     tkdestroy(tt)
 
