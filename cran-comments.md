@@ -1,3 +1,36 @@
+# idendr0 1.5.3
+-----------------------------------------------------------------------
+## Test environments
+* linux Fedora 24, R 3.3.1 using platform x86_64, linux-gnu
+* win-builder (release), R version 3.3.2 (2016-10-31) using platform x86_64-w64-mingw32 (64-bit)
+* win-builder (devel), R development (unstable) (2017-02-22 r72243) using platform: x86_64-w64-mingw32 (64-bit)
+
+## R CMD check results
+There were no ERRORs or WARNINGs.
+
+There was 1 NOTE:
+
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Tomas Sieger <tomas.sieger@seznam.cz>'
+
+Possibly mis-spelled words in DESCRIPTION:
+  Dendrograms (3:20)
+  Tcl (18:65)
+  Tk (18:69)
+  backport (17:15)
+  dendrogram (13:26, 14:41)
+
+Found the following (possibly) invalid DOIs:
+  DOI: 10.18637/jss.v076.i10
+    From: inst/CITATION
+    Status: Not Found
+    Message: 404
+    
+The possibly mis-spelled words are OK.
+
+The DOI in the CITATION is for a new JSS publication that will be registered after publication on CRAN.
+
+
 # idendr0 1.5.2
 -----------------------------------------------------------------------
 ## Test environments

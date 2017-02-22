@@ -1,5 +1,8 @@
-# idendr0 1.5.2.9000
+# idendr0 1.5.3
 -----------------------------------------------------------------------
+* our JSS paper referenced
+* vignette added
+* minor improvements
 
 
 # idendr0 1.5.2
