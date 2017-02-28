@@ -25,6 +25,6 @@ Integration with other plots can be seen in `demo(idendroWithScatterAndParcoord)
 
 ![Example](/man/figures/idendr0_2.png?raw=true "Integration with other plots.")
 
-For more demos, please run `demo(package="idendr0")'.
+For more demos, please run `demo(package="idendr0")`'.
 
 Find out more at https://github.com/tsieger/idendr0
