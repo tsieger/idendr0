@@ -13,7 +13,7 @@ to base R graphics and Tcl/Tk GUI.
 * the latest released version: `install.packages("idendr0")`
 * the latest development version: `devtools::install_github("tsieger/idendr0")`
 
-### A simple example:
+##### A simple example:
 
     library(idendr0)
     hc <- hclust(dist(iris[, 1:4]))
@@ -21,7 +21,8 @@ to base R graphics and Tcl/Tk GUI.
 
 ![Example](/man/figures/idendr0_1.png?raw=true "Simple example.")
 
-### Integration with other plots can be seen in `demo(idendroWithScatterAndParcoord)`, 
+##### Integration with other plots
+Please see `demo(idendroWithScatterAndParcoord)`, 
 which, in addition to the dendrogram, creates two feature space plots:
 
 ![Example](/man/figures/idendr0_2.png?raw=true "Integration with other plots.")
