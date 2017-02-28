@@ -15,9 +15,16 @@ To install:
 
 A simple example:
 
+    library(idendr0)
     hc <- hclust(dist(iris[, 1:4]))
     idendro(hc, iris)
 
-For demos, please run `demo(package="idendr0")'.
+![Example](/man/figures/idendr0_1.png?raw=true "Simple example.")
+
+Integration with other plots can be seen in `demo(idendroWithScatterAndParcoord)`:
+
+![Example](/man/figures/idendr0_2.png?raw=true "Integration with other plots.")
+
+For more demos, please run `demo(package="idendr0")'.
 
 Find out more at https://github.com/tsieger/idendr0
