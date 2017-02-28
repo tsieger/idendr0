@@ -19,11 +19,12 @@ A simple example:
     hc <- hclust(dist(iris[, 1:4]))
     idendro(hc, iris)
 
-![Example](/man/figures/idendr0_1.png?raw=true "Simple example."){width=50%}
+![Example](/man/figures/idendr0_1.png?raw=true "Simple example.")
 
-Integration with other plots can be seen in `demo(idendroWithScatterAndParcoord)`:
+Integration with other plots can be seen in `demo(idendroWithScatterAndParcoord)`, 
+which, in addition to the dendrogram, creates two feature space plots:
 
-![Example](/man/figures/idendr0_2.png?raw=true "Integration with other plots."){width=75%}
+![Example](/man/figures/idendr0_2.png?raw=true "Integration with other plots.")
 
 For more demos, please run `demo(package="idendr0")`'.
 
