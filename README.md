@@ -2,11 +2,17 @@
 
 'idendr0' is an interactive dendrogram that enables the user to select 
 and color clusters, to zoom and pan the dendrogram, and to visualize 
-the clustered data not only in a built-in heat map, but also in 'GGobi' 
-interactive plots and user-supplied plots. 
+the clustered data not only in a built-in heat map, but also in 
+[GGobi](http://ggobi.org/) interactive plots and user-supplied plots. 
 
-idendr0 is a backport of 'idendro' (https://github.com/tsieger/idendro) 
+idendr0 is a backport of [idendro](https://github.com/tsieger/idendro)
 to base R graphics and Tcl/Tk GUI.
+
+#### Documentation
+
+[A paper](http://dx.doi.org/10.18637/jss.v076.i10) in the 
+[Journal of Statistical Software](http://jstatsoft.org/)
+and [idendro vignette](/inst/doc/idendro.pdf).
 
 ## To install:
 
@@ -22,6 +28,7 @@ to base R graphics and Tcl/Tk GUI.
 ![Example](/man/figures/idendr0_1.png?raw=true "Simple example.")
 
 ##### Integration with other plots
+
 Please see `demo(idendroWithScatterAndParcoord)`, 
 which, in addition to the dendrogram, creates two feature space plots:
 
@@ -29,4 +36,4 @@ which, in addition to the dendrogram, creates two feature space plots:
 
 For more demos, please run `demo(package="idendr0")`'.
 
-Find out more at https://github.com/tsieger/idendr0
+Find out more at https://github.com/tsieger/idendr0.
