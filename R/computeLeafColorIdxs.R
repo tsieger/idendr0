@@ -3,7 +3,7 @@ computeLeafColorIdxs<-function
 ### cluster selection.
 ##keyword<<internal
 (
-    df ##<< dhared data frame, see 'prepareDendro'
+    df ##<< shared data frame, see 'prepareDendro'
 ) {
     leafColorIdxs<-rep(0,df$n)
     for (i in seq(along=df$clusters)) {
