@@ -273,6 +273,10 @@ idendro<-structure(function# Interactive Dendrogram
 
     #### arguments handling
     ####
+    if (is.null(x) && ggobi) {
+        warning('\'x\' argument missing, ggobi integration disabled')
+        ggobi<-FALSE
+    }
     if (ggobi) {
         if (ggobiFetchingStyle!='selected') {
             selectionType<-suppressWarnings(as.numeric(ggobiFetchingStyle))
@@ -319,12 +323,15 @@ idendro<-structure(function# Interactive Dendrogram
                 ggobiColorScheme,'\' GGobi color scheme specified using the \'ggobiColorScheme\' argument.')
         }
         g<-rggobi::ggobi(x)
+        if (dbg.ggobi>1) printVar(g)
         # set color scheme
+        if (dbg.ggobi>1) cat('setting colorscheme\n')
         rggobi::colorscheme(g)<-ggobiColorScheme
         # read the ggobi color scheme colors in order to use the same colors in the dendrogram
         cols<-sapply(rggobi::colorscheme(g)$colors,function(x)rgb(x[1],x[2],x[3]))
         if (dbg.ggobi) printVar(cols)
         # close the default display(s)
+        if (dbg.ggobi>1) printVar(rggobi::displays(g))
         sapply(rggobi::displays(g),close)
         # set the "pixel" draw style
         rggobi::glyph_type(g[1])<-ggobiGlyphType
