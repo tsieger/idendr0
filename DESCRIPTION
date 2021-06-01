@@ -2,11 +2,11 @@ Package: idendr0
 Type: Package
 Title: Interactive Dendrograms
 Version: 1.5.3.9000
-Date: 2017-02-22
+Date: 2021-06-01
 Author: Tomas Sieger
 Depends:
 Imports: tcltk, tkrplot, grDevices, graphics, stats
-Suggests: rggobi, DendSer, cluster, RColorBrewer, datasets
+Suggests: rggobi, DendSer, cluster, RColorBrewer, datasets, loon
 URL: http://github.com/tsieger/idendr0
 Maintainer: Tomas Sieger <tomas.sieger@seznam.cz>
 BugReports: https://github.com/tsieger/idendr0/issues

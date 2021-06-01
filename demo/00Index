@@ -4,6 +4,7 @@ idendroWithScatter      dendrogram + heat map + interactive user-supplied scatte
 idendroWithScatterAndParcoord
                         dendrogram + scatter plot + parallel coordinate plot integration demo
 idendroWithGgobi        dendrogram + heat map + GGobi scatter plot matrix demo
+idendroWithLoon         dendrogram + heat map + loon scatter plot matrix demo
 idendroBig              dendrogram + heat map + scatter plot demo using big data
 idendroPersistent       persisting the clusters selected in the dendrogram demo
 idendroFlow             dendrogram + heat map of flow cytometry data
