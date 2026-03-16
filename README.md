@@ -11,7 +11,7 @@ to base R graphics and Tcl/Tk GUI.
 #### Documentation
 
 [A paper](http://dx.doi.org/10.18637/jss.v076.i10) in the 
-[Journal of Statistical Software](http://jstatsoft.org/)
+[Journal of Statistical Software](https://www.jstatsoft.org/)
 and [idendro vignette](/inst/doc/idendro.pdf).
 
 ## To install:
