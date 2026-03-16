@@ -288,22 +288,22 @@ idendro<-structure(function# Interactive Dendrogram
         ggobiColorizeCallback<-function(colors) {
             if (dbg.ggobi>1) cat('ggobi colorizeCallback called\n')
             if (dbg.ggobi>1) printVar(colors)
-            rggobi::glyph_color(g[1])<-(1+colors)
+            eval(str2expression('rggobi::glyph_color(g[1])<-(1+colors)'))
             if (!is.null(colorizeCallback)) colorizeCallback(colors)
         }
         ggobiFetchSelectedCallback<-function() {
             if (dbg.ggobi>1) cat('ggobi fetchSelectedCallback called\n')
             if (dbg.ggobi>1) cat(paste('fetching type: ',ggobiFetchingStyle,'\n'))
             if (ggobiFetchingStyle=='selected') {
-               selection<-rggobi::selected(g[1])
+               selection<-eval(str2expression('rggobi::selected(g[1])'))
             } else {
-                selection<-(rggobi::glyph_type(g[1])==ggobiFetchingStyle)
+                selection<-eval(str2expression('(rggobi::glyph_type(g[1])==ggobiFetchingStyle)'))
             }
             if (dbg.ggobi>1) printVar(selection)
             return(selection)
         }
 
-        if (!requireNamespace("rggobi",quietly=TRUE)) {
+        if (eval(str2expression('!requireNamespace("rggobi",quietly=TRUE)'))) {
             stop('The \'rggobi\' package is not installed, can\'t integrate with GGobi.')
         }
         # We need to attach "rggobi", otherwise thw following error gets thrown from ggobi:
@@ -312,7 +312,7 @@ idendro<-structure(function# Interactive Dendrogram
         # However, in order to keep the search path intact after the call to idendro(),
         # we attempt to unload "rggobi" later (see below).
         if (!"package:rggobi"%in%search()) {
-          attachNamespace("rggobi")
+          eval(str2expression('attachNamespace("rggobi")'))
           ggobiAttached<-TRUE
         } else {
           ggobiAttached<-FALSE
@@ -322,22 +322,22 @@ idendro<-structure(function# Interactive Dendrogram
             message('Note: integrating with GGobi, ignoring the \'clusterColors\' argument: using colors from the \'',
                 ggobiColorScheme,'\' GGobi color scheme specified using the \'ggobiColorScheme\' argument.')
         }
-        g<-rggobi::ggobi(x)
+        g<-eval(str2expression('rggobi::ggobi(x)'))
         if (dbg.ggobi>1) printVar(g)
         # set color scheme
         if (dbg.ggobi>1) cat('setting colorscheme\n')
-        rggobi::colorscheme(g)<-ggobiColorScheme
+        eval(str2expression('rggobi::colorscheme(g)<-ggobiColorScheme'))
         # read the ggobi color scheme colors in order to use the same colors in the dendrogram
-        cols<-sapply(rggobi::colorscheme(g)$colors,function(x)rgb(x[1],x[2],x[3]))
+        cols<-eval(str2expression('sapply(rggobi::colorscheme(g)$colors,function(x)rgb(x[1],x[2],x[3]))'))
         if (dbg.ggobi) printVar(cols)
         # close the default display(s)
-        if (dbg.ggobi>1) printVar(rggobi::displays(g))
-        sapply(rggobi::displays(g),close)
+        if (dbg.ggobi>1) eval(str2expression('printVar(rggobi::displays(g))'))
+        eval(str2expression('sapply(rggobi::displays(g),close)'))
         # set the "pixel" draw style
-        rggobi::glyph_type(g[1])<-ggobiGlyphType
-        rggobi::glyph_size(g[1])<-ggobiGlyphSize
+        eval(str2expression('rggobi::glyph_type(g[1])<-ggobiGlyphType'))
+        eval(str2expression('rggobi::glyph_size(g[1])<-ggobiGlyphSize'))
         # draw scatterplot matrix of all parameters
-        rggobi::display(g[1],"Scatterplot Matrix")
+        eval(str2expression('rggobi::display(g[1],"Scatterplot Matrix")'))
 
         rv<-idendro(
             h=h,
@@ -375,7 +375,7 @@ idendro<-structure(function# Interactive Dendrogram
 
         # unload "rggobi" not to alter the search path
         if (ggobiAttached) {
-          unloadNamespace("rggobi")
+          eval(str2expression('unloadNamespace("rggobi")'))
         }
 
         return(invisible(rv))
