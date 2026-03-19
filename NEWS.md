@@ -1,5 +1,6 @@
-# idendr0 1.5.3.9000
+ idendr0 1.5.4
 -----------------------------------------------------------------------
+* minor improvements (fixing NOTEs from 'R CMD check')
 
 
 # idendr0 1.5.3

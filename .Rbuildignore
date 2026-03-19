@@ -4,6 +4,8 @@
 ^man/.*orig$
 ^man/.*rej$
 
+^test-dist/
+
 # .md files
 ^cran-comments\.md$
 ^NEWS.md$
@@ -15,8 +17,8 @@ tmp
 
 # scripts
 ^version_update$
-^create_test_dist$
-^create_test_dist\.old$
+^create_and_test_dist$
+^create_and_test_dist\.old$
 ^test_dist$
 ^fix_man$
 ^make_NEWS$
